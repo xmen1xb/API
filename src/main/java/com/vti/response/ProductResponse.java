@@ -32,7 +32,7 @@ public class ProductResponse {
 	private short discount;
 	private List<ProductImagesRespone> listResponse;
 	private Date enter_date;
-	
+
 	public ProductResponse(int id, String name, String description, Double price, String ram, String memory,
 			String brand, String category, short quantity, String camera, String color, String screenSize,
 			String operatingSystem, String chip, String battery, String sim, String image, short discount,
@@ -59,5 +59,4 @@ public class ProductResponse {
 		this.enter_date = enter_date;
 	}
 
-	
 }

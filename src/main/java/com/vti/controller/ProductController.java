@@ -60,17 +60,17 @@ public class ProductController {
 				List<ProductImage> listIMG = product.getListProductImage();
 				List<ProductImagesRespone> listResponse = new ArrayList<>();
 				for (ProductImage productImage : listIMG) {
-					ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(), 
+					ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(),
 							productImage.getProduct().getProductId(), productImage.getPath_image());
 					listResponse.add(imgresponse);
 				}
-				
+
 				ProductResponse response = new ProductResponse(product.getProductId(), product.getProductName(),
 						product.getDescription(), product.getPrice(), product.getRam().getRamName(),
 						product.getMemory().getMemoryName(), product.getBrand().getBrandName(), product.getCategory(),
 						product.getQuantity(), product.getCamera(), product.getColor(), product.getScreenSize(),
 						product.getOperatingSystem(), product.getChip(), product.getBattery(), product.getSim(),
-						product.getPathImage(), product.getDiscount(),listResponse, product.getEnterDate());
+						product.getPathImage(), product.getDiscount(), listResponse, product.getEnterDate());
 				return response;
 			}
 		});
@@ -78,8 +78,8 @@ public class ProductController {
 	}
 
 	/**
-	 * API getAll Product Filter theo price down
-	 * fix trả ra thêm list ProductImgResponse
+	 * API getAll Product Filter theo price down fix trả ra thêm list
+	 * ProductImgResponse
 	 */
 
 	@RequestMapping(value = "/desc", method = RequestMethod.GET)
@@ -93,7 +93,7 @@ public class ProductController {
 				List<ProductImage> listIMG = product.getListProductImage();
 				List<ProductImagesRespone> listResponse = new ArrayList<>();
 				for (ProductImage productImage : listIMG) {
-					ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(), 
+					ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(),
 							productImage.getProduct().getProductId(), productImage.getPath_image());
 					listResponse.add(imgresponse);
 				}
@@ -102,7 +102,7 @@ public class ProductController {
 						product.getMemory().getMemoryName(), product.getBrand().getBrandName(), product.getCategory(),
 						product.getQuantity(), product.getCamera(), product.getColor(), product.getScreenSize(),
 						product.getOperatingSystem(), product.getChip(), product.getBattery(), product.getSim(),
-						product.getPathImage(), product.getDiscount(),listResponse, product.getEnterDate());
+						product.getPathImage(), product.getDiscount(), listResponse, product.getEnterDate());
 				return response;
 			}
 		});
@@ -110,8 +110,8 @@ public class ProductController {
 	}
 
 	/**
-	 * API getAll Product Filter theo price up
-	 * fix trả ra thêm list ProductImgResponse
+	 * API getAll Product Filter theo price up fix trả ra thêm list
+	 * ProductImgResponse
 	 */
 
 	@RequestMapping(value = "/asc", method = RequestMethod.GET)
@@ -125,7 +125,7 @@ public class ProductController {
 				List<ProductImage> listIMG = product.getListProductImage();
 				List<ProductImagesRespone> listResponse = new ArrayList<>();
 				for (ProductImage productImage : listIMG) {
-					ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(), 
+					ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(),
 							productImage.getProduct().getProductId(), productImage.getPath_image());
 					listResponse.add(imgresponse);
 				}
@@ -134,7 +134,7 @@ public class ProductController {
 						product.getMemory().getMemoryName(), product.getBrand().getBrandName(), product.getCategory(),
 						product.getQuantity(), product.getCamera(), product.getColor(), product.getScreenSize(),
 						product.getOperatingSystem(), product.getChip(), product.getBattery(), product.getSim(),
-						product.getPathImage(), product.getDiscount(),listResponse, product.getEnterDate());
+						product.getPathImage(), product.getDiscount(), listResponse, product.getEnterDate());
 				return response;
 			}
 		});
@@ -142,8 +142,7 @@ public class ProductController {
 	}
 
 	/**
-	 * API getProduct by ProductID
-	 * fix trả ra thêm list ProductImgResponse
+	 * API getProduct by ProductID fix trả ra thêm list ProductImgResponse
 	 */
 
 	@GetMapping(value = "/{id}")
@@ -155,7 +154,7 @@ public class ProductController {
 		List<ProductImage> listIMG = product.getListProductImage();
 		List<ProductImagesRespone> listResponse = new ArrayList<>();
 		for (ProductImage productImage : listIMG) {
-			ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(), 
+			ProductImagesRespone imgresponse = new ProductImagesRespone(productImage.getImage_id(),
 					productImage.getProduct().getProductId(), productImage.getPath_image());
 			listResponse.add(imgresponse);
 		}
@@ -164,7 +163,7 @@ public class ProductController {
 				product.getMemory().getMemoryName(), product.getBrand().getBrandName(), product.getCategory(),
 				product.getQuantity(), product.getCamera(), product.getColor(), product.getScreenSize(),
 				product.getOperatingSystem(), product.getChip(), product.getBattery(), product.getSim(),
-				product.getPathImage(), product.getDiscount(),listResponse, product.getEnterDate());
+				product.getPathImage(), product.getDiscount(), listResponse, product.getEnterDate());
 
 		return new ResponseEntity<ProductResponse>(response, HttpStatus.OK);
 	}
@@ -172,7 +171,7 @@ public class ProductController {
 	/**
 	 * API deleteProduct by ProductID
 	 */
-	
+
 	@PreAuthorize("hasRole('Admin')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable(name = "id") int id) {
@@ -183,25 +182,26 @@ public class ProductController {
 		productService.deleteProduct(id);
 		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
 	}
-	
+
 	/**
-	 * API create Product 
+	 * API create Product
 	 */
 	@PreAuthorize("hasRole('Admin')")
 	@PostMapping
-	public ResponseEntity<?> createProduct(@RequestBody ProductRequest request){
+	public ResponseEntity<?> createProduct(@RequestBody ProductRequest request) {
 		productService.createProduct(request);
-		return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);	
+		return new ResponseEntity<String>("Create successfully!", HttpStatus.OK);
 	}
-	
+
 	/**
-	 * API update Product 
+	 * API update Product
 	 */
 	@PreAuthorize("hasRole('Admin')")
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateProduct(@PathVariable(name = "id") int productId, @RequestBody ProductRequest request){
+	public ResponseEntity<?> updateProduct(@PathVariable(name = "id") int productId,
+			@RequestBody ProductRequest request) {
 		productService.updateProduct(productId, request);
-		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);		
+		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
 	}
 
 	/**
